@@ -1,0 +1,678 @@
+/**********
+foundation
+**********/
+
+//reset.css
+@import url(reset.css);
+@import url(modaal.css);
+
+$gray: #888;
+$black: #707070;
+$blue: #0FBFB9;
+
+html{
+    font-family: 'Times New Roman', Times, serif;
+    color: $black;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+//JavaScript
+.js-fade-in {
+    opacity: 0;
+    transition-duration: 1000ms;
+    transition-property: opacity, transform;
+}
+
+.js-fade-in--up{
+    transform: translate(0, 100px);
+}
+
+.js-fade-in--left{
+    transform: translate(100px, 0);
+}
+
+
+.js-scroll-in {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+
+//アンダーラインアニメーション
+
+@mixin hover-underline($type: fade, $dir: null, $weight: 2px, $color: #000) {
+    @if $dir == null {
+      @if $type == fade {
+        $dir: 'top';
+      } @else if $type == slide {
+        $dir: 'center';
+      }
+    }
+  
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    &::after {
+      position: absolute;
+      left: 0;
+      content: '';
+      width: 100%;
+      height: $weight;
+      background: $color;
+      @if $type == fade {
+        transition: .3s;
+        opacity: 0;
+        visibility: hidden;
+        @if $dir == bottom {
+          bottom: $weight * -4;
+        } @else {
+          bottom: $weight;
+        }
+      } @else if $type == slide {
+        bottom: $weight * -2;
+        transform: scale(0, 1);
+        transition: transform .3s;
+        @if $dir == left-right or $dir == right-in-left {
+          transform-origin: left top;
+        } @else if $dir == right-left or $dir == left-in-right {
+          transform-origin: right top;
+        } @else {
+          transform-origin: center top;
+        }
+      }
+    }
+    &:hover::after {
+      @if $type == fade {
+        bottom: $weight * -2;
+        opacity: 1;
+        visibility: visible;
+      } @else if $type == slide {
+        @if $dir == left-in-right {
+          transform-origin: left top;
+        } @else if $dir == right-in-left {
+          transform-origin: right top;
+        }
+        transform: scale(1, 1);
+      }
+    }
+  }
+
+/**********
+layout
+**********/
+
+header{
+
+}
+nav{
+
+}
+aside.p-menu{
+    z-index: 100;
+    position: fixed;
+    top: 30%;
+    bottom: 0;
+    right: 10px;
+    width: auto;
+    height: 36%;
+    .p-menu__nav{
+        width: auto;
+        display: block;
+        flex-direction: column;
+        top: 300px;
+        right: 30px;
+        padding: 10px;
+        border-radius: 30px;
+        background-color: white;
+        .p-menu__list{
+            flex-direction: column;
+            margin-bottom: 0;
+            .p-menu__listelm{
+                text-align: center;
+                margin-right: 0;
+                margin-bottom: 20px;
+                .p-menu__listlink{
+                    text-shadow: none;
+                    color: $black;
+                }
+            }
+        }
+        .p-menu__iconlist{
+            .c-text--shadow{
+                text-shadow:none;
+                color: $black;
+            }
+            .c-menu__iconlistelm{
+                margin-top: 0;
+                margin-bottom: 20px;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px){
+    aside.p-menu{
+        display: none;
+    }
+}
+
+footer{
+    width: 100%;
+    height: 500px;
+    background-image: url(../images/footer.png);
+    background-size: cover;
+    background-position: center center;
+    @media screen and (max-width: 1024px){
+        transform: none;
+    }
+    .p-footer-container{
+        .c-sitename{
+            position: absolute;
+            bottom: 10px;
+            @media screen and (max-width: 1024px){
+                color: white;
+            }
+        }
+        .p-menu__list{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            .p-menu__listelm{
+                .p-menu__listlink{
+                    @media screen and (max-width: 1024px){
+                        color: white;
+                        font-size: 24px;
+                    }
+                }
+                .p-menu__listlink::after{
+                    background-color: white;
+                }
+            }
+        }
+    }
+}
+
+footer:hover{
+    filter: sepia(0.5);
+}
+
+
+
+#top{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: calc(100vw - 40px);
+    height: calc(100vh - 40px);
+    border-radius: 20px;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url("../images/top.jpg");
+    overflow: hidden;
+    @media screen and (max-width: 1024px){
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+        width: 100%;
+        height: 100vh;
+    }
+}
+#particles{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+#top-copy{
+    color: white;
+    height: 0px;
+    font-size: 48px;
+    position: absolute;
+    left: 50px;
+    bottom: 200px;
+    @media screen and (max-width: 1024px){
+        font-size: 24px;
+    }
+}
+
+#about{
+    text-align: center;
+}
+
+#services{
+    text-align: center;
+}
+
+#works{
+    text-align: center;
+}
+
+#contact{
+    text-align: center;
+
+}
+
+/**********
+objcet-component
+**********/
+
+.c-width-restriction{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    @media screen and (max-width: 1024px) {
+        max-width: 700px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.c-width-restriction--narrow{
+    max-width: 600px;
+}
+
+.c-jpfont{
+    font-family: 'Noto Sans Serif';
+}
+.c-jptext{
+    font-size: 16px;
+    line-height: 28px;
+    text-align: left;
+}
+
+
+.c-listelm{
+    color: white;
+    margin-right: 40px;
+}
+
+.c-sitename{
+    margin-left: 40px;
+    font-size: 24px;
+    color: white;
+    @media screen and (max-width: 1024px) {
+        color: $black;
+    }
+}
+
+.c-text--shadow{
+    text-shadow: 1px 1px 3px $black;
+}
+
+.c-me__photo{
+    width: 240px;
+    height: 270px;
+    object-fit: cover;
+    margin-left: 100px;
+    margin-right: 80px;
+    border-radius: 40px;
+    @media screen and (max-width: 1024px){
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+    }
+}
+
+.c-me__description{
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.c-box--shadow{
+    box-shadow: 1px 1px 3px $black;
+}
+
+//アイコン
+.c-menu__iconlistelm{
+    margin-left: auto;
+    margin-top: 40px;
+    margin-right: 52px;
+    text-align: right;
+    width: 16px;
+    height: 16px;
+}
+
+.c-iconlistelm{
+    transition: 0.5s;
+}
+
+.c-iconlistelm:hover{
+    transform: scale(2);
+}
+
+.c-twitter--color:hover{
+    color: #00acee;
+}
+
+.c-instagram--color:hover{
+    color: #cf2e92;
+}
+
+.c-section-name{
+    font-size: 36px;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    color: $gray;
+}
+
+.c-services__image{
+    display: block;
+    height: 140px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+
+.c-services__description{
+    @media screen and (max-width: 1024px) {
+        text-align: center;
+    }
+}
+
+.c-gallery__link{
+    display: block;
+    justify-content: space-between;
+}
+
+.c-gallery__image{
+    display: block;
+    object-fit: cover;
+    max-width: 250px;
+    padding: 5px;
+    box-shadow: 0 0 3px #707070;
+    @media screen and (max-width: 1024px) {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+.c-effect--brightness{
+    @media screen and (min-width: 1024px){
+        filter: brightness(0.8);
+        transition: 0.3s;
+    }
+}
+
+.c-effect--brightness:hover{
+    filter: brightness(1);
+    transition: 0.3s;
+}
+
+.c-scale--zoom{
+    transition: 0.3s;
+}
+
+.c-scale--zoom:hover{
+    transform: scale(1.2);
+}
+
+//背景画像エフェクト
+.c-effect--sepia{
+    filter: sepia(0.8) blur(1px) brightness(0.5);
+    transition: 0.3s;
+    @media screen and (max-width: 1024px){
+        filter: sepia(0.8) brightness(0.5);
+    }
+}
+
+.c-effect--sepia:hover{
+    filter: sepia(0.5);
+}
+
+.c-effect--gray{
+    filter: grayscale(0.5);
+    transition: 0.3s;
+}
+
+.c-effect--gray:hover{
+    filter: none;
+}
+
+
+//文字エフェクト
+.c-effect__underline{
+    @include hover-underline('slide', 'center', 2px);
+}
+.c-effect__underline--white::after{
+    background: #FFF;
+}
+
+.c-effect__underline--black::after{
+    background: $black;
+}
+.c-effect__underline--blue::after{
+    background: $blue;
+}
+
+
+//font awesome
+.fa--side-text::after{
+    display: none;
+    font-family: 'Times New Roman', Times, serif;
+    position: absolute;
+    color: $blue;
+    right: 10px;
+    width: 100px;
+}
+
+.fa--side-text:hover::after{
+    display: inline-block;
+}
+
+.fa-up--text::after{
+    content: 'Top';
+}
+
+.fa-address-card--text::after{
+    content: 'About me';
+}
+
+.fa-services--text::after{
+    content: 'Services';
+}
+
+.fa-works--text::after{
+    content: 'Works';
+}
+
+.fa-contact--text::after{
+    content: 'Contact';
+}
+
+/**********
+object-project
+**********/
+.p-menu{
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    @media screen and (max-width: 1024px){
+        z-index: 100;
+        position: fixed;
+        top: 0;
+        background-color: white;
+        height: 50px;
+        padding: 0;
+        align-items: center;
+        box-shadow: 1px 1px 10px $black;
+    }
+}
+
+.p-menu__nav{
+    margin-left: auto;
+    @media screen and (max-width: 1024px){
+        position: fixed;
+        background-color: white;
+        width: 300px;
+        height: 100vh;
+        top: 0;
+        right: -300px;
+        transition: 0.3s;
+        transform: translate3d(0,0,0);
+    }
+}
+
+.c-nav--toggle{
+    position: absolute;
+    z-index: 1001;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    display: none;
+    cursor: pointer;
+    @media screen and (max-width: 1024px){
+        display: block;
+        opacity: 0;
+    }
+}
+
+.c-nav--toggle:checked~.p-menu__nav{
+    right: 0;
+}
+
+.fa-nav.fas{
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    right: 10px;
+    top: 10px;
+    font-size: 32px;
+    @media screen and (max-width: 1024px){
+        display: block;
+    }
+}
+
+
+
+.p-menu__list{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    @media screen and (max-width: 1024px){
+        text-align:center;
+        margin-top: 200px;
+        flex-direction: column;
+    }
+}
+
+.p-menu__listelm{
+    margin-right: 40px;
+    @media screen and (max-width: 1024px){
+        margin-top: 40px;
+        margin-right: 0;
+    }
+}
+
+.p-menu__listlink{
+    color: white;
+    @media screen and (max-width: 1024px){
+        color: $black;
+        font-size: 28px;
+    }
+}
+
+.p-menu__listlink::after{
+    @media screen and (max-width: 1024px) {
+        background-color: $blue;
+    }
+}
+
+.p-menu__iconlist{
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.c-menu__iconlistelm{
+    @media screen and (max-width: 1024px) {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    }
+}
+
+.p-about-container{
+    width: 100%;
+    display :flex;
+    @media screen and (max-width: 1024px) {
+        flex-direction: column;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.p-services-container{
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: 1024px) {
+        width: auto;
+        flex-direction: column;
+    }
+}
+
+.p-services-wrapper{
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    @media screen and (max-width: 1024px) {
+        max-width: 500px;
+        flex-direction: column;
+    }
+}
+
+.p-gallery-container{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    width: 900px;
+    justify-content: space-between;
+    @media screen and (max-width: 1024px) {
+        width: auto;
+        max-width: 500px;
+        flex-direction: column;
+    }
+}
+
+.p-gallery-wrapper{
+    margin-bottom: 40px;
+    transition: 0.3s;
+    transition-timing-function: ease-in-out;
+    @media screen and (max-width: 1024px) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.p-gallery-wrapper:hover{
+    transform: scale(1.2);
+}
+
+
+/**********
+object-utility
+**********/
