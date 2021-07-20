@@ -58,7 +58,6 @@
                         <i class="fab fa-instagram c-iconlistelm c-instagram--color"></i>
                     </a>
                 </li>
-                </li>
                 <li class="c-menu__iconlistelm">
                     <a href="https://github.com/t3chmi" class="c-link p-menu__listlink c-text--shadow">
                         <i class="fab fa-github c-iconlistelm c-github--color"></i>
@@ -345,6 +344,11 @@
                 <li class="c-menu__iconlistelm">
                     <a href="#contact" class="c-link p-menu__listlink c-text--shadow">
                         <i class="fab fa-instagram c-iconlistelm c-instagram--color"></i>
+                    </a>
+                </li>
+                <li class="c-menu__iconlistelm">
+                    <a href="https://github.com/t3chmi" class="c-link p-menu__listlink c-text--shadow">
+                        <i class="fab fa-github c-iconlistelm c-github--color"></i>
                     </a>
                 </li>
             </ul>
