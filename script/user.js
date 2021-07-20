@@ -57,7 +57,7 @@ function def_modaal(){
         overlay_opacity: 0.8,
         type:'iframe',
         width: 800,//iframe横幅
-        height: Math.min($(window).height()-200), //iframe高さ
+        height: Math.min($(window).height() - 100), //iframe高さ
         overlay_close:true,//モーダル背景クリック時に閉じるか
         before_open:function(){// モーダルが開く前に行う動作
             //$(".modaal-iframe-elem").attr({allowtransparency: true});
@@ -94,14 +94,14 @@ if($('.particles').length){
 $(window).on('load', function () {
     setTimeout(function(){
         $('.js-loading').addClass('js-loading--hide');
-    }, 500);
+    }, 500000);
 });
 
 // 10秒待っても読み込みが終わらない時は強制的にローディング画面をフェードアウト
 function stopload(){
     $('.js-loading').delay(1000).fadeOut(700);
 }
-setTimeout('stopload()',3000);
+setTimeout('stopload()',1000);
 
 $(".js-jump").click(function(){
     let link = $(this).data('to');
