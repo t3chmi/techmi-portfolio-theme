@@ -94,7 +94,7 @@ if($('.particles').length){
 $(window).on('load', function () {
     setTimeout(function(){
         $('.js-loading').addClass('js-loading--hide');
-    }, 500000);
+    }, 500);
 });
 
 // 10秒待っても読み込みが終わらない時は強制的にローディング画面をフェードアウト

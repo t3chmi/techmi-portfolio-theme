@@ -31,6 +31,15 @@
     <script src="<?php echo $path ?>/script/slick.min.js"></script>
     <script src="https://unpkg.com/ityped@1.0.3"></script>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0H5W411RHG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-0H5W411RHG');
+    </script>
 
     <?php wp_head(); ?>
 </head>
